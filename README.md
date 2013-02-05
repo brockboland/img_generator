@@ -44,3 +44,12 @@ Manually coloring each pixel
 * 3x3, 10x scale: 0.696371 seconds
 * 3x3, 40x scale: 6.622205 seconds
 * 3x3, 100x scale: 41.802607 seconds
+
+Todo
+====
+- Rather than coloring `scale x scale` pixels for each block that needs to be black, generate the image at `width x height` pixels, then resize it to scale up.
+  - https://github.com/sdsykes/fastimage_resize, requires gd
+  - https://github.com/shokai/ImageResize-ruby, requires Java
+- Avoid generating reflections? Maybe not worth it. Since it's only black and white, the only interesting output will be those that happen to generate shapes that are only recognizable in one direction, like letters or numbers.
+- Improve speed
+  - https://github.com/grosser/parallel
