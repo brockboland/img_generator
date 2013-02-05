@@ -8,7 +8,9 @@ I got the idea from [a comment by Morinaka](http://www.reddit.com/r/programming/
 
 How
 ---
-This script makes use of [chunky_png](https://github.com/wvanbergen/chunky_png) by [Willem van Bergen](https://github.com/wvanbergen). You can install the gem by simply running `gem install chunky_png`.
+This script makes use of [`chunky_png`](https://github.com/wvanbergen/chunky_png) or [`oily_png`](https://github.com/wvanbergen/oily_png) by [Willem van Bergen](https://github.com/wvanbergen). `chunky_png` is a pure Ruby implementation; `oily_png` is a C implementation, so it's faster, but comes with a warning that it may gobble memory and cause problems.
+
+You can install the gem by simply running `gem install chunky_png` or `gem install oily_png`; just make sure you use the corresponding `require` line in `generate.rb` for whichever gem you install.
 
 To use the script, optionally set the `width` and `height` variables, then run `ruby generate.rb` from the command line. An `output` directory will be created, and PNG files will be saved there.
 
@@ -16,6 +18,8 @@ Keep in mind that increasing the values of `height` and `width` will quickly inc
 
 Benchmarks
 ==========
+chunky_png
+----------
 With `rect` function
 * 3x3, 10x scale: 1.234458 seconds
 * 3x3, 40x scale: 12.044467 seconds
@@ -24,3 +28,17 @@ Manually coloring each pixel
 * 3x3, 10x scale: 0.885919 seconds
 * 3x3, 40x scale: 9.121357 seconds
 * 3x3, 100x scale: 55.499981 seconds
+
+oily_png
+----------
+[oily_png](https://github.com/wvanbergen/oily_png) offers marginal improvement over chunky_png, but manually drawing every pixel in each block is still faster than using the `rect` function.
+
+With `rect` function
+* 3x3, 10x scale: 1.235969 seconds
+* 3x3, 40x scale: 12.260409 seconds
+* 3x3, 100x scale: 71.492362 seconds
+
+Manually coloring each pixel
+* 3x3, 10x scale: 0.696371 seconds
+* 3x3, 40x scale: 6.622205 seconds
+* 3x3, 100x scale: 41.802607 seconds

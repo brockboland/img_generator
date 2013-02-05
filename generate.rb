@@ -1,5 +1,9 @@
 begin_time= Time.now
-require 'chunky_png'
+
+# oily_png is a faster implementation of chunky_png. Both work the same; either
+# may cause disastrous problems for you.
+# require 'chunky_png'
+require 'oily_png'
 require 'fileutils'
 
 # How many columns of blocks?
