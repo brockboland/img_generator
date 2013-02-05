@@ -18,6 +18,8 @@ Keep in mind that increasing the values of `height` and `width` will quickly inc
 
 Benchmarks
 ==========
+`oily_png` is a bit faster than `chunky_png`, and as it turns out, the [`rect` method](http://rdoc.info/gems/chunky_png/ChunkyPNG/Canvas/Drawing#rect-instance_method) is slower than manually coloring each pixel by looping to color in a larger area.
+
 chunky_png
 ----------
 With `rect` function
@@ -31,7 +33,7 @@ Manually coloring each pixel
 
 oily_png
 ----------
-[oily_png](https://github.com/wvanbergen/oily_png) offers marginal improvement over chunky_png, but manually drawing every pixel in each block is still faster than using the `rect` function.
+[`oily_png`](https://github.com/wvanbergen/oily_png) offers marginal improvement over `chunky_png`, but manually drawing every pixel in each block is still faster than using the `rect` function.
 
 With `rect` function
 * 3x3, 10x scale: 1.235969 seconds
