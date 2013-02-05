@@ -26,6 +26,8 @@ FileUtils.mkdir(dir)
 bits = width * height
 range = 2**(width * height)
 
+filename_prefix = dir + '/' + width.to_s + 'x' + height.to_s + '_'
+
 # Loop over each variation
 (0..range - 1).each do |i|
   # Convert the number to binary and zero-pad
@@ -61,7 +63,7 @@ range = 2**(width * height)
   end
 
   # Save the resulting image
-  png.save('output/' + i.to_s + '.png')
+  png.save(filename_prefix + i.to_s + '.png')
 end
 
 puts 'Run time: ' + (Time.now - begin_time).to_s + ' seconds'
