@@ -8,10 +8,10 @@ require 'fileutils'
 require 'fastimage_resize'
 
 # How many columns of blocks?
-width = 5
+width = 4
 
 # How many rows of blocks?
-height = 5
+height = 4
 
 # How many pixels should each block actually be?
 scale = 50
