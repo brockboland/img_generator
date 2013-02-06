@@ -5,15 +5,16 @@ begin_time= Time.now
 # require 'chunky_png'
 require 'oily_png'
 require 'fileutils'
+require 'fastimage_resize'
 
 # How many columns of blocks?
-width = 3
+width = 5
 
 # How many rows of blocks?
-height = 3
+height = 5
 
 # How many pixels should each block actually be?
-scale = 40
+scale = 50
 
 # Image file output directory
 dir = 'output'
@@ -36,7 +37,7 @@ filename_prefix = dir + '/' + width.to_s + 'x' + height.to_s + '_'
   binary = '0' * (bits - binary.length) + binary
 
   # Create a blank white canvas
-  png = ChunkyPNG::Image.new(width * scale, height * scale, ChunkyPNG::Color::WHITE)
+  png = ChunkyPNG::Image.new(width, height, ChunkyPNG::Color::WHITE)
 
   # Loop over each bit in the string, each of which represents a block of color
   (0..height-1).each do |row|
@@ -46,24 +47,19 @@ filename_prefix = dir + '/' + width.to_s + 'x' + height.to_s + '_'
       # Image starts out with a white background, so only set the pixels that
       # should be black
       if binary[index] == '1'
-        # Determine the boundaries of this block of color
-        startX = column * scale
-        endX = startX + scale - 1
-        startY = row * scale
-        endY = startY + scale - 1
-
-        # Color in the block, one pixel at a time
-        (startX..endX).each do |x|
-          (startY..endY).each do |y|
-            png[x, y] = ChunkyPNG::Color::BLACK
-          end
-        end
+        png[column, row] = ChunkyPNG::Color::BLACK
       end
     end
   end
 
   # Save the resulting image
-  png.save(filename_prefix + i.to_s + '.png')
+  filename = filename_prefix + i.to_s + '.png'
+  png.save(filename)
+
+  # Resize
+  if (scale > 1)
+    FastImage.resize(filename, width * scale, height * scale, :outfile=>filename)
+  end
 end
 
 puts 'Run time: ' + (Time.now - begin_time).to_s + ' seconds'
