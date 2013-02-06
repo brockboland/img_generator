@@ -14,22 +14,27 @@ Setup
 =====
 You need a few things for this to work
 
-**`chunky_png` or `oily_png`**
+### `chunky_png` or `oily_png`
 `oily_png` is faster, so it's preferred:
+
     gem install oily_png
 
 If that causes problems or errors, use `chunky_png` instead (and change the `require` at the beginning of `generate.rb` from oily to chunky):
+
     gem install chunky_png
 
-**`fastimage_resize`**
+### `fastimage_resize`
 To resize the small images up:
+
     gem install fastimage_resize
 
-**`gd`**
+### `gd`
 If you're using [Homebrew](https://github.com/mxcl/homebrew):
+
     brew install gd
 
 If you're using [MacPorts](http://www.macports.org/):
+
     sudo port install gd2
 
 
